@@ -8,6 +8,9 @@ app.get('/:tagname', (req, res) => {
         .then((questions) => {
             return res.status(200).json({questions: questions.data})
         }) 
+        .catch(err => {
+            return res.status(400).json({err})
+        })
 })
 
 app.get('/question/:id', (req, res) => {
