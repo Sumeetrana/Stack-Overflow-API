@@ -10,7 +10,10 @@ app.get('/:tagname', (req, res) => {
         }) 
 })
 
-
+app.get('/question/:id', (req, res) => {
+    console.log(req.params.id);
+    
+})
 
 app.listen(3002, () => {
     console.log('Server running');
