@@ -16,7 +16,19 @@ app.get('/:tagname', (req, res) => {
 app.get('/question/:id', (req, res) => {
     axios.get(`https://api.stackexchange.com/2.2/questions/${req.params.id}/answers?order=desc&sort=activity&site=stackoverflow`)
         .then(question => {
-            console.log(question.data);
+            if (question.data.items[0].is_accepted) {
+                let ans = {}
+                axios.get(`https://api.stackexchange.com/2.2/questions/${req.params.id}?order=desc&sort=activity&site=stackoverflow`)
+                    .then(item => {
+                        ans['Que.'] = item.data.items[0].title;
+                        ans['Ans.'] = question.data.items[0];
+
+                        return res.status(200).json({ans});
+                    })
+                    .catch(err => {
+                        return res.status(404).json({err})
+                    })
+            }
             
         })
     
