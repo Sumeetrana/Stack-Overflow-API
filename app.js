@@ -22,7 +22,7 @@ app.get('/question/:id', (req, res) => {
                     .then(item => {
                         ans['Que.'] = item.data.items[0].title;
                         ans['Ans.'] = question.data.items[0];
-
+                            
                         return res.status(200).json({ans});
                     })
                     .catch(err => {
