@@ -42,6 +42,10 @@ app.get('/question/:id', (req, res) => {
     
 })
 
+app.get('*', (req, res) => {
+    res.status(404).json({"Message: ": "Route not found"})
+})
+
 app.listen(3002, () => {
     console.log('Server running');
     
