@@ -11,7 +11,10 @@ app.get('/:tagname', (req, res) => {
 })
 
 app.get('/question/:id', (req, res) => {
-    console.log(req.params.id);
+    axios.get(`https://api.stackexchange.com/2.2/questions/${req.params.id}?order=desc&sort=activity&site=stackoverflow`)
+        .then(question => {
+            res.status(200).json({ question: question.data })
+        })
     
 })
 
