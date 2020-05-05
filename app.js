@@ -22,11 +22,19 @@ app.get('/question/:id', (req, res) => {
                     .then(item => {
                         ans['Que.'] = item.data.items[0].title;
                         ans['Ans.'] = question.data.items[0];
-                            
+
                         return res.status(200).json({ans});
                     })
                     .catch(err => {
                         return res.status(404).json({err})
+                    })
+            } else {
+                axios.get(`https://api.stackexchange.com/2.2/questions/${req.params.id}/answers?order=desc&sort=votes&site=stackoverflow`)
+                    .then(questions => {
+                        return res.status(200).json({questions});
+                    })
+                    .catch(err => {
+                        return res.status(404).json({err});
                     })
             }
             
